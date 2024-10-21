@@ -4,11 +4,13 @@ class Drawing(tk.Canvas):
     def __init__(self, master=None, width =None, height = None, background = None):
         super().__init__(master, width = width, height = height, background=background)
         self.master = master
-
+        self.configure(cursor="@assets/pencil.cur")
         self.old_x = None
         self.old_y = None
-        self.pen_color = "black"
-        self.line_width = 5
+        self.default_pen_color = "black"
+        self.pen_color = self.default_pen_color
+        self.default_line_width = 5
+        self.line_width = self.default_line_width
 
         self.bind('<Button-1>', self.activate_paint)
         self.bind('<B1-Motion>', self.paint)
@@ -34,7 +36,17 @@ class Drawing(tk.Canvas):
         self.old_y = None
 
     def set_pen_color(self, color):
+        self.configure(cursor="@assets/pencil.cur")
+        self.line_width = self.default_line_width
         self.pen_color = color
 
     def delete_drawing(self):
         self.delete("all")
+        self.configure(cursor="@assets/pencil.cur")
+        self.pen_color = self.default_pen_color
+        self.line_width = self.default_line_width
+    
+    def set_eraser(self):
+        self.pen_color = self['background']
+        self.line_width = 50
+        self.configure(cursor="@assets/eraser.cur")
