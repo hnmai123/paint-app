@@ -7,7 +7,8 @@ class Drawing(tk.Canvas):
         self.configure(cursor="@assets/pencil.cur")
         self.old_x = None
         self.old_y = None
-        self.default_pen_color = "black"
+        self.eraser_mode = False
+        self.default_pen_color = "black"    
         self.pen_color = self.default_pen_color
         self.default_line_width = 5
         self.line_width = self.default_line_width
@@ -15,6 +16,7 @@ class Drawing(tk.Canvas):
         self.bind('<Button-1>', self.activate_paint)
         self.bind('<B1-Motion>', self.paint)
         self.bind('<ButtonRelease-1>', self.reset)
+        self.bind('<Motion>', self.track_eraser)
 
     def activate_paint(self, event):
         self.old_x = event.x
@@ -39,6 +41,7 @@ class Drawing(tk.Canvas):
         self.configure(cursor="@assets/pencil.cur")
         self.line_width = self.default_line_width
         self.pen_color = color
+        self.eraser_mode = False
 
     def delete_drawing(self):
         self.delete("all")
@@ -50,3 +53,12 @@ class Drawing(tk.Canvas):
         self.pen_color = self['background']
         self.line_width = 50
         self.configure(cursor="@assets/eraser.cur")
+        self.eraser_mode = True
+
+    def track_eraser(self, event):
+        if self.eraser_mode:
+            self.delete("eraser_cursor")
+            self.create_oval(event.x - self.line_width / 2, event.y - self.line_width / 2,
+                            event.x + self.line_width / 2, event.y + self.line_width / 2,
+                            fill=self.pen_color, outline="grey", tag="eraser_cursor", width=1)
+    
