@@ -17,7 +17,10 @@ class Drawing(tk.Canvas):
     def activate_paint(self, event):
         self.old_x = event.x
         self.old_y = event.y
-
+        self.create_oval(event.x - self.line_width / 2, event.y - self.line_width / 2,
+                            event.x + self.line_width / 2, event.y + self.line_width / 2,
+                            fill=self.pen_color, outline=self.pen_color)
+        
     def paint(self, event):
         if self.old_x and self.old_y:
             self.create_line(self.old_x, self.old_y, event.x, event.y,
@@ -32,3 +35,6 @@ class Drawing(tk.Canvas):
 
     def set_pen_color(self, color):
         self.pen_color = color
+
+    def delete_drawing(self):
+        self.delete("all")
