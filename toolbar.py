@@ -19,7 +19,7 @@ class Toolbar(tk.Frame):
         self.color_label = tk.Label(self, bg="black", width=4, height = 2, relief="sunken")
         self.color_label.pack(side="left", padx=5)
 
-        self.clear_button = tk.Button(self, text="Clear", command=self.clear_space)
+        self.clear_button = tk.Button(self, text="Clear", command=self.reset_clear_space)
         self.clear_button.pack(side="left", padx=5)
 
         self.eraser = tk.PhotoImage(file="assets/eraser.png").subsample(14)
@@ -31,3 +31,7 @@ class Toolbar(tk.Frame):
         if color:
             self.color_label.config(background=str(color[1]))
             self.set_color(color[1])
+    
+    def reset_clear_space(self):
+        self.clear_space()
+        self.color_label.config(background="black")
