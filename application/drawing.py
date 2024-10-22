@@ -7,7 +7,6 @@ class Drawing(tk.Canvas):
         self.configure(cursor="@assets/pencil.cur")
         self.old_x = None
         self.old_y = None
-        self.eraser_mode = False
         self.default_pen_color = "black"    
         self.pen_color = self.default_pen_color
         self.default_line_width = 5
@@ -53,12 +52,10 @@ class Drawing(tk.Canvas):
         self.pen_color = self['background']
         self.line_width = 50
         self.configure(cursor="@assets/eraser.cur")
-        self.eraser_mode = True
 
     def track_eraser(self, event):
-        if self.eraser_mode:
-            self.delete("eraser_cursor")
-            self.create_oval(event.x - self.line_width / 2, event.y - self.line_width / 2,
-                            event.x + self.line_width / 2, event.y + self.line_width / 2,
-                            fill=self.pen_color, outline="grey", tag="eraser_cursor", width=1)
+        self.delete("eraser_cursor")
+        self.create_oval(event.x - self.line_width / 2, event.y - self.line_width / 2,
+                        event.x + self.line_width / 2, event.y + self.line_width / 2,
+                        fill=self.pen_color, outline="grey", tag="eraser_cursor", width=1)
     
