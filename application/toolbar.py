@@ -14,17 +14,17 @@ class Toolbar(tk.Frame):
     def create_widgets(self):
         self.color_image = tk.PhotoImage(file="assets/colour.png").subsample(14)
         self.color_button = tk.Button(self, image=self.color_image, command=self.choose_color)
-        self.color_button.pack(side="left", padx=5)
+        self.color_button.grid(row=0, column=0, padx=5)
 
         self.color_label = tk.Label(self, bg="black", width=4, height = 2, relief="sunken")
-        self.color_label.pack(side="left", padx=5)
+        self.color_label.grid(row=0, column=1, padx=5)
 
         self.clear_button = tk.Button(self, text="Clear", command=self.reset_clear_space)
-        self.clear_button.pack(side="left", padx=5)
+        self.clear_button.grid(row=0, column=2, padx=5)
 
         self.eraser = tk.PhotoImage(file="assets/eraser.png").subsample(14)
         self.eraser_button = tk.Button(self, image=self.eraser, command=self.set_eraser)
-        self.eraser_button.pack(side="left", padx=5)
+        self.eraser_button.grid(row=0, column=3, padx=5)
 
     def choose_color(self, color = "black"):
         color = colorchooser.askcolor(title="Choose a color")
