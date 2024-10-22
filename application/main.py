@@ -15,7 +15,13 @@ class Application(tk.Frame):
         self.drawing_space = dr.Drawing(self.master, width=window_width, height=drawing_space_height, background='white')
         self.drawing_space.place(x=0, y=tool_bar_height)
 
-        self.toolbar = tb.Toolbar(tool_bar_frame, self.drawing_space.set_pen_color, self.drawing_space.delete_drawing, self.drawing_space.set_eraser)
+        self.toolbar = tb.Toolbar(tool_bar_frame, 
+                                  self.drawing_space.set_pen_color, 
+                                  self.drawing_space.delete_drawing, 
+                                  self.drawing_space.set_eraser,
+                                  self.drawing_space.set_shape,
+                                  self.drawing_space.normal_drawing)
+        
         self.toolbar.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
         self.draw = dr.Drawing(self.drawing_space)
