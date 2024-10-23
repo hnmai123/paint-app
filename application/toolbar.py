@@ -109,8 +109,8 @@ class Toolbar(tk.Frame):
         self.set_shape(None)
         self.selected_shape.set(None)  # Clear the selection of the shape
         self.set_color(self.color)
-        self.brush_size_slider.set(self.default_brush_size)
-        self.brush_size_slider.grid_remove()
+        self.brush_size_slider.set(self.brush_size)
+        self.update_brush_size(self.brush_size)
 
     def reset_clear_space(self):
         self.clear_space()
