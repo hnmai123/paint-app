@@ -83,6 +83,7 @@ class Drawing(tk.Canvas):
         
     def set_shape(self, shape):
         self.shape = shape
+        self.configure(cursor="@assets/pencil.cur")
         
     def normal_drawing(self):
         self.eraser_mode = False
