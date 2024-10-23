@@ -55,7 +55,7 @@ class Toolbar(tk.Frame):
                                       value=shape, 
                                       image=self.shapes_image[shape], 
                                       compound="left", 
-                                      command=self.choose_shape)
+                                      command=self.shape_mode)
         
         self.shapes_menu.grid(row=0, column=4, padx=5)
 
@@ -69,11 +69,12 @@ class Toolbar(tk.Frame):
             self.set_color(color[1])
             self.color = color[1]
 
-    def choose_shape(self):
+    def shape_mode(self):
         selected_shape = self.selected_shape.get()
         if selected_shape:  # Only update if a shape is selected
             self.shapes_menu.config(image=self.shapes_image[selected_shape])
             self.set_shape(selected_shape)
+        self.set_color(self.color)
 
     def normal_mode(self):
         self.normal_drawing()
@@ -88,6 +89,7 @@ class Toolbar(tk.Frame):
         self.shapes_menu.config(image=self.shapes_icon)
         self.set_shape(None)
         self.selected_shape.set(None)  # Clear the selection of the shape
+        self.color = "black"
 
     def erase_mode(self):
         self.set_eraser()
