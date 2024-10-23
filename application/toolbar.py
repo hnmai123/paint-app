@@ -29,6 +29,7 @@ class Toolbar(tk.Frame):
         self.pack()
 
     def create_widgets(self):
+        # Color button
         self.color_image = tk.PhotoImage(file="assets/colour.png").subsample(14)
         self.color_button = tk.Button(self, image=self.color_image, command=self.choose_color)
         self.color_button.grid(row=0, column=0, padx=5)
@@ -91,6 +92,7 @@ class Toolbar(tk.Frame):
             self.color_label.config(background=str(color[1]))
             self.set_color(color[1])
             self.color = color[1]
+        self.update_brush_size(self.brush_size)
 
     def shape_mode(self):
         selected_shape = self.selected_shape.get()
@@ -98,6 +100,8 @@ class Toolbar(tk.Frame):
             self.shapes_menu.config(image=self.shapes_image[selected_shape])
             self.set_shape(selected_shape)
         self.set_color(self.color)
+        self.brush_size_slider.set(self.brush_size)
+        self.update_brush_size(self.brush_size)
 
     def normal_mode(self):
         self.normal_drawing()
@@ -106,6 +110,7 @@ class Toolbar(tk.Frame):
         self.selected_shape.set(None)  # Clear the selection of the shape
         self.set_color(self.color)
         self.brush_size_slider.set(self.default_brush_size)
+        self.brush_size_slider.grid_remove()
 
     def reset_clear_space(self):
         self.clear_space()
@@ -115,6 +120,7 @@ class Toolbar(tk.Frame):
         self.selected_shape.set(None)  # Clear the selection of the shape
         self.color = "black"
         self.brush_size_slider.set(self.default_brush_size)
+        self.brush_size_slider.grid_remove()
 
     def erase_mode(self):
         self.set_eraser()
@@ -122,6 +128,7 @@ class Toolbar(tk.Frame):
         self.selected_shape.set(None)  # Clear the selection of the shape
         self.shapes_menu.config(image=self.shapes_icon)
         self.brush_size_slider.set(self.erase_size)
+        self.brush_size_slider.grid_remove()
 
     def display_brush_slider(self):
         self.brush_size_slider.grid()
