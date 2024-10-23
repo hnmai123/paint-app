@@ -20,7 +20,8 @@ class Application(tk.Frame):
                                   self.drawing_space.delete_drawing, 
                                   self.drawing_space.set_eraser,
                                   self.drawing_space.set_shape,
-                                  self.drawing_space.normal_drawing)
+                                  self.drawing_space.normal_drawing,
+                                  self.drawing_space.set_brush_size)
         self.toolbar.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
         self.draw = dr.Drawing(self.drawing_space)

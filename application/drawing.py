@@ -10,6 +10,7 @@ class Drawing(tk.Canvas):
         self.default_pen_color = "black"    
         self.pen_color = self.default_pen_color
         self.default_line_width = 5
+        self.erase_default_line_width = 50
         self.line_width = self.default_line_width
         self.shape = None
         self.eraser_mode = False
@@ -73,7 +74,7 @@ class Drawing(tk.Canvas):
     def set_eraser(self):
         self.eraser_mode = True
         self.pen_color = self['background']
-        self.line_width = 50
+        self.line_width = self.erase_default_line_width
         self.configure(cursor="@assets/eraser.cur")
 
     def track_mouse(self, event):
@@ -91,3 +92,6 @@ class Drawing(tk.Canvas):
         self.pen_color = self.default_pen_color
         self.line_width = self.default_line_width
         self.configure(cursor="@assets/pencil.cur")
+
+    def set_brush_size(self, size):
+        self.line_width = size
