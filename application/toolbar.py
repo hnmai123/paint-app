@@ -15,6 +15,7 @@ class Toolbar(tk.Frame):
         self.clear_space = clear_space
         self.set_eraser = set_eraser
         self.set_shape = set_shape
+        self.color = "black"
         self.shapes = ["Line", "Rectangle", "Circle"]
         self.selected_shape = tk.StringVar(value=None)
         self.normal_drawing = normal_drawing
@@ -49,7 +50,12 @@ class Toolbar(tk.Frame):
         self.shapes_menu.configure(menu=self.menu)
 
         for shape in self.shapes:
-            self.menu.add_radiobutton(label=shape, variable=self.selected_shape, value=shape, image=self.shapes_image[shape], compound="left", command=self.choose_shape)
+            self.menu.add_radiobutton(label=shape, 
+                                      variable=self.selected_shape, 
+                                      value=shape, 
+                                      image=self.shapes_image[shape], 
+                                      compound="left", 
+                                      command=self.choose_shape)
         
         self.shapes_menu.grid(row=0, column=4, padx=5)
 
@@ -61,6 +67,7 @@ class Toolbar(tk.Frame):
         if color:
             self.color_label.config(background=str(color[1]))
             self.set_color(color[1])
+            self.color = color[1]
 
     def choose_shape(self):
         selected_shape = self.selected_shape.get()
@@ -73,6 +80,7 @@ class Toolbar(tk.Frame):
         self.shapes_menu.config(image=self.shapes_icon)
         self.set_shape(None)
         self.selected_shape.set(None)  # Clear the selection of the shape
+        self.set_color(self.color)
 
     def reset_clear_space(self):
         self.clear_space()
