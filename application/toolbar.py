@@ -8,7 +8,8 @@ class Toolbar(tk.Frame):
                  set_eraser=None, 
                  set_shape=None,
                  normal_drawing=None,
-                 set_brush_size=None):
+                 set_brush_size=None,
+                 set_fill_mode=None):
         super().__init__(master)
 
         self.master = master
@@ -24,6 +25,7 @@ class Toolbar(tk.Frame):
         self.default_brush_size = 5
         self.brush_size = self.default_brush_size
         self.erase_size = 50
+        self.set_fill_mode = set_fill_mode
 
         self.create_widgets()
         self.pack()
@@ -82,6 +84,11 @@ class Toolbar(tk.Frame):
         self.brush_size_slider.grid(row=0, column=5, padx=5)
         self.brush_size_slider.grid_remove()
 
+        # Fill color button
+        self.color_bucket_image = tk.PhotoImage(file="assets/paint-bucket.png").subsample(14)
+        self.color_bucket_button = tk.Button(self, image=self.color_bucket_image, command=self.fill_mode)
+        self.color_bucket_button.grid(row=0, column=6, padx=5)
+
         # Clear button
         self.clear_button = tk.Button(self, text="Clear", command=self.reset_clear_space)
         self.clear_button.grid(row=0, column=7, padx=5)
@@ -136,3 +143,9 @@ class Toolbar(tk.Frame):
     def update_brush_size(self, size):
         self.brush_size = int(size)
         self.set_brush_size(self.brush_size)
+
+    def fill_mode(self):
+        self.set_shape(None)
+        self.selected_shape.set(None)
+        self.shapes_menu.config(image=self.shapes_icon)
+        self.set_fill_mode()
