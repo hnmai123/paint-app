@@ -22,11 +22,10 @@ class Application(tk.Frame):
                                   self.drawing_space.set_shape,
                                   self.drawing_space.normal_drawing,
                                   self.drawing_space.set_brush_size,
-                                  self.drawing_space.set_fill_mode)
+                                  self.drawing_space.set_fill_mode,
+                                  self.drawing_space.open_image,
+                                  self.drawing_space.save_image)
         self.toolbar.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-
-        self.draw = dr.Drawing(self.drawing_space)
-
 
 if __name__ == '__main__':
     master = tk.Tk()

@@ -9,7 +9,9 @@ class Toolbar(tk.Frame):
                  set_shape=None,
                  normal_drawing=None,
                  set_brush_size=None,
-                 set_fill_mode=None):
+                 set_fill_mode=None,
+                 open_image=None,
+                 save_image=None):
         super().__init__(master)
 
         self.master = master
@@ -26,7 +28,8 @@ class Toolbar(tk.Frame):
         self.brush_size = self.default_brush_size
         self.erase_size = 50
         self.set_fill_mode = set_fill_mode
-
+        self.open_image = open_image
+        self.save_image = save_image
         self.create_widgets()
         self.pack()
 
@@ -92,6 +95,13 @@ class Toolbar(tk.Frame):
         # Clear button
         self.clear_button = tk.Button(self, text="Clear", command=self.reset_clear_space)
         self.clear_button.grid(row=0, column=7, padx=5)
+
+        # Open button
+        self.open_button = tk.Button(self, text="Open", command=self.open_image)
+        self.open_button.grid(row=0, column=8, padx=5)
+        # Save button
+        self.save_button = tk.Button(self, text="Save", command=self.save_image)
+        self.save_button.grid(row=0, column=9, padx=5)
 
     def choose_color(self, color = "black"):
         color = colorchooser.askcolor(title="Choose a color")
