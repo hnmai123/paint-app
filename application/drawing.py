@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import filedialog
+from PIL import Image, ImageDraw, ImageTk
 
 class Drawing(tk.Canvas):
     def __init__(self, master=None, width =None, height = None, background = None):
@@ -15,6 +17,9 @@ class Drawing(tk.Canvas):
         self.shape = None
         self.eraser_mode = False
         self.fill_mode = False
+        self.image = Image.new("RGB", (width, height), background)  # Create an image for saving
+        self.draw = ImageDraw.Draw(self.image)
+
         self.bind('<Button-1>', self.activate_paint)
         self.bind('<B1-Motion>', self.paint)
         self.bind('<ButtonRelease-1>', self.reset)
@@ -114,3 +119,26 @@ class Drawing(tk.Canvas):
         if overlapping:
             shape_id = overlapping[0]
             self.itemconfig(shape_id, fill=self.pen_color)
+
+    def open_image(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.png *.jpg *.jpeg")])
+        if file_path:
+            img = Image.open(file_path)
+            self.image = img.copy()
+            self.draw = ImageDraw.Draw(self.image)
+            self.tk_img = ImageTk.PhotoImage(img)
+            self.create_image(0, 0, anchor="nw", image=self.tk_img)
+
+    def save_image(self):
+        self.delete("mouse_cursor")
+        file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png"), ("JPEG files", "*.jpg"), ("All files", "*.*")])
+        if file_path:
+            ps_file = "temp_canvas.ps"
+            self.postscript(file=ps_file, colormode='color')
+            img = Image.open(ps_file)
+            img.save(file_path)  # Save to the specified path
+            img.close()
+            print("Image saved successfully!", file_path)
+            # Optionally delete the temp file
+            import os
+            os.remove(ps_file)
