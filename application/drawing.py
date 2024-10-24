@@ -111,6 +111,8 @@ class Drawing(tk.Canvas):
     def set_fill_mode(self):
         self.eraser_mode = False
         self.fill_mode = True
+        self.pen_color = self.pen_color
+        self.line_width = self.line_width
         self.configure(cursor="@assets/fill.cur")
     
     def fill_area(self, x, y):

@@ -140,12 +140,12 @@ class Toolbar(tk.Frame):
         self.brush_size_slider.grid_remove()
 
     def erase_mode(self):
-        self.set_eraser()
         self.set_shape(None)
         self.selected_shape.set(None)  # Clear the selection of the shape
         self.shapes_menu.config(image=self.shapes_icon)
         self.brush_size_slider.set(self.erase_size)
         self.brush_size_slider.grid_remove()
+        self.set_eraser()
 
     def display_brush_slider(self):
         self.brush_size_slider.grid()
@@ -158,4 +158,6 @@ class Toolbar(tk.Frame):
         self.set_shape(None)
         self.selected_shape.set(None)
         self.shapes_menu.config(image=self.shapes_icon)
+        self.brush_size_slider.set(self.brush_size)
+        self.update_brush_size(self.brush_size)
         self.set_fill_mode()
