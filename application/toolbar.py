@@ -43,7 +43,7 @@ class Toolbar(tk.Frame):
         self.color_button = tk.Button(self, image=self.color_image, command=self.choose_color, text="Color", compound="top")
         self.color_button.grid(row=0, column=0, padx=5)
 
-        self.color_label = tk.Label(self, bg="black", width=4, height = 2, relief="sunken")
+        self.color_label = tk.Label(self, bg="black", width=4, height = 3, relief="sunken")
         self.color_label.grid(row=0, column=1, padx=5)
 
         # Eraser button
@@ -64,7 +64,7 @@ class Toolbar(tk.Frame):
         }
 
         self.shapes_icon = tk.PhotoImage(file="assets/shapes.png").subsample(14)
-        self.shapes_menu = tk.Menubutton(self, image=self.shapes_icon, indicatoron=True, borderwidth=1, relief="raised", text="Shapes", compound="top")
+        self.shapes_menu = tk.Menubutton(self, image=self.shapes_icon, indicatoron=True, borderwidth=1, relief="raised", text="Shapes", compound="top", pady=5)
         self.menu = tk.Menu(self.shapes_menu, tearoff=False)
         self.shapes_menu.configure(menu=self.menu)
 

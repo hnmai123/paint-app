@@ -37,7 +37,7 @@ if __name__ == '__main__':
     master.geometry(str(window_width) + 'x' + str(window_height))
     
     with open("state_canvas.ps", "w") as f:
-       pass
+        pass
 
     app = Application(window_width, window_height, master=master)
     app.pack()
