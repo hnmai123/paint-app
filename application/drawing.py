@@ -6,7 +6,7 @@ class Drawing(tk.Canvas):
     def __init__(self, master=None, width =None, height = None, background = None):
         super().__init__(master, width = width, height = height, background=background)
         self.master = master
-        self.configure(cursor="@assets/pencil.cur")
+        self.configure(cursor="@assets/pencil.xbm")
         self.old_x = None
         self.old_y = None
         self.default_pen_color = "black"    
@@ -102,14 +102,14 @@ class Drawing(tk.Canvas):
         self.old_y = None
 
     def set_pen_color(self, color):
-        self.configure(cursor="@assets/pencil.cur")
+        self.configure(cursor="@assets/pencil.xbm")
         self.line_width = self.default_line_width
         self.pen_color = color
         self.eraser_mode = False
 
     def delete_drawing(self):
         self.delete("all")
-        self.configure(cursor="@assets/pencil.cur")
+        self.configure(cursor="@assets/pencil.xbm")
         self.pen_color = self.default_pen_color
         self.line_width = self.default_line_width
         with open("state_canvas.ps", "w") as f:
@@ -121,7 +121,7 @@ class Drawing(tk.Canvas):
         self.eraser_mode = True
         self.pen_color = self['background']
         self.line_width = self.erase_default_line_width
-        self.configure(cursor="@assets/eraser.cur")
+        self.configure(cursor="@assets/eraser.xbm")
         self.fill_mode = False
 
     def track_mouse(self, event):
@@ -132,7 +132,7 @@ class Drawing(tk.Canvas):
         
     def set_shape(self, shape):
         self.shape = shape
-        self.configure(cursor="@assets/pencil.cur")
+        self.configure(cursor="@assets/pencil.xbm")
         self.eraser_mode = False
         self.fill_mode = False 
         
@@ -140,7 +140,7 @@ class Drawing(tk.Canvas):
         self.eraser_mode = False
         self.pen_color = self.default_pen_color
         self.line_width = self.default_line_width
-        self.configure(cursor="@assets/pencil.cur")
+        self.configure(cursor="@assets/pencil.xbm")
         self.fill_mode = False
 
     def set_brush_size(self, size):
@@ -151,7 +151,7 @@ class Drawing(tk.Canvas):
         self.fill_mode = True
         self.pen_color = self.default_pen_color
         self.line_width = self.default_line_width
-        self.configure(cursor="@assets/fill.cur")
+        self.configure(cursor="@assets/fill.xbm")
     
     def fill_area(self, x, y):
         overlapping = self.find_overlapping(x - 1, y - 1, x + 1, y + 1)

@@ -40,13 +40,17 @@ class Toolbar(tk.Frame):
 
     def create_widgets(self):
         # Color button
-        self.color_button = Button(self, bg="black", width=50, height=50, borderless=True, activebackground="black", command=self.choose_color, borderwidth=0)
+        self.color_image = tk.PhotoImage(file="assets/colour.png").subsample(14)
+        self.color_button = tk.Button(self, image=self.color_image, command=self.choose_color, text="Color", compound="top")
         self.color_button.grid(row=0, column=0, padx=5)
+
+        self.color_button = Button(self, bg="black", width=50, height=60, borderless=True, activebackground="black", command=self.choose_color, borderwidth=0)
+        self.color_button.grid(row=0, column=1, padx=5)
 
         # Eraser button
         self.eraser = tk.PhotoImage(file="assets/eraser.png").subsample(14)
         self.eraser_button = tk.Button(self, image=self.eraser, command=self.erase_mode, text="Erase", compound="top")
-        self.eraser_button.grid(row=0, column=1, padx=5)
+        self.eraser_button.grid(row=0, column=2, padx=5)
 
         # Pen button
         self.pen = tk.PhotoImage(file="assets/pencil.png").subsample(14)
