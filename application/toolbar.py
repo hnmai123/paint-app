@@ -12,7 +12,9 @@ class Toolbar(tk.Frame):
                  set_brush_size=None,
                  set_fill_mode=None,
                  open_image=None,
-                 save_image=None):
+                 save_image=None,
+                 undo=None,
+                 redo=None):
         super().__init__(master)
 
         self.master = master
@@ -31,6 +33,8 @@ class Toolbar(tk.Frame):
         self.set_fill_mode = set_fill_mode
         self.open_image = open_image
         self.save_image = save_image
+        self.undo = undo
+        self.redo = redo
         self.create_widgets()
         self.pack()
 
@@ -41,12 +45,12 @@ class Toolbar(tk.Frame):
 
         # Eraser button
         self.eraser = tk.PhotoImage(file="assets/eraser.png").subsample(14)
-        self.eraser_button = tk.Button(self, image=self.eraser, command=self.erase_mode)
+        self.eraser_button = tk.Button(self, image=self.eraser, command=self.erase_mode, text="Erase", compound="top")
         self.eraser_button.grid(row=0, column=1, padx=5)
 
         # Pen button
         self.pen = tk.PhotoImage(file="assets/pencil.png").subsample(14)
-        self.pen_button = tk.Button(self, image=self.pen, command=self.normal_mode)
+        self.pen_button = tk.Button(self, image=self.pen, command=self.normal_mode, text="Draw", compound="top")
         self.pen_button.grid(row=0, column=3, padx=5)
 
         # Shapes menu
@@ -56,7 +60,7 @@ class Toolbar(tk.Frame):
             "Circle": tk.PhotoImage(file="assets/circle.png").subsample(14)
         }
         self.shapes_icon = tk.PhotoImage(file="assets/shapes.png").subsample(14)
-        self.shapes_menu = tk.Menubutton(self, image=self.shapes_icon, indicatoron=True, borderwidth=1, relief="raised")
+        self.shapes_menu = tk.Menubutton(self, image=self.shapes_icon, indicatoron=True, borderwidth=1, relief="raised", text="Shapes", compound="top", height=70)
         self.menu = tk.Menu(self.shapes_menu, tearoff=False)
         self.shapes_menu.configure(menu=self.menu)
 
@@ -72,7 +76,7 @@ class Toolbar(tk.Frame):
 
         # Brush size button
         self.bursh_image = tk.PhotoImage(file="assets/brush.png").subsample(14)
-        self.brush_button = tk.Button(self, image=self.bursh_image, command=self.display_brush_slider)
+        self.brush_button = tk.Button(self, image=self.bursh_image, command=self.display_brush_slider, text="Size", compound="top")
         self.brush_button.grid(row=0, column=5, padx=5)
 
         # Brush size slider
@@ -84,20 +88,30 @@ class Toolbar(tk.Frame):
 
         # Fill color button
         self.color_bucket_image = tk.PhotoImage(file="assets/paint-bucket.png").subsample(14)
-        self.color_bucket_button = tk.Button(self, image=self.color_bucket_image, command=self.fill_mode)
+        self.color_bucket_button = tk.Button(self, image=self.color_bucket_image, command=self.fill_mode, text="Fill", compound="top")
         self.color_bucket_button.grid(row=0, column=6, padx=5)
+
+        # Undo button
+        self.undo_image = tk.PhotoImage(file="assets/undo.png").subsample(14)
+        self.undo_button = tk.Button(self, image=self.undo_image, command=self.undo, text="Undo", compound="top")
+        self.undo_button.grid(row=0, column=7, padx=5)
+
+        # Redo button
+        self.redo_image = tk.PhotoImage(file="assets/redo.png").subsample(14)
+        self.redo_button = tk.Button(self, image=self.redo_image, command=self.redo, text="Redo", compound="top")
+        self.redo_button.grid(row=0, column=8, padx=5)
 
         # Clear Button
         self.clear_button = tk.Button(self, text="Clear", command=self.reset_clear_space)
-        self.clear_button.grid(row=0, column=7, padx=5)
+        self.clear_button.grid(row=0, column=9, padx=5)
 
         # Open button
         self.open_button = tk.Button(self, text="Open", command=self.open_image)
-        self.open_button.grid(row=0, column=8, padx=5)
+        self.open_button.grid(row=0, column=10, padx=5)
 
         # Save button
         self.save_button = tk.Button(self, text="Save", command=self.save_image)
-        self.save_button.grid(row=0, column=9, padx=5)
+        self.save_button.grid(row=0, column=11, padx=5)
 
     def choose_color(self, color = "black"):
         color = colorchooser.askcolor(title="Choose a color")
