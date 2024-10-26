@@ -43,7 +43,7 @@ class Toolbar(tk.Frame):
         self.color_button = tk.Button(self, image=self.color_image, command=self.choose_color, text="Color", compound="top")
         self.color_button.grid(row=0, column=0, padx=5)
 
-        self.color_label = tk.Label(self, bg="black", width=4, height = 3, relief="sunken")
+        self.color_label = tk.Button(self, bg="black", width=4, height = 3, relief="sunken", command=self.choose_color)
         self.color_label.grid(row=0, column=1, padx=5)
 
         # Eraser button
