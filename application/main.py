@@ -6,7 +6,7 @@ class Application(tk.Frame):
     def __init__(self, window_width, window_height, master=None):
         super().__init__(master)
         self.master = master
-        tool_bar_height = 60
+        tool_bar_height = 70
         drawing_space_height = window_height - tool_bar_height
 
         tool_bar_frame = tk.Frame(self.master)
@@ -24,7 +24,9 @@ class Application(tk.Frame):
                                   self.drawing_space.set_brush_size,
                                   self.drawing_space.set_fill_mode,
                                   self.drawing_space.open_image,
-                                  self.drawing_space.save_image)
+                                  self.drawing_space.save_image,
+                                  self.drawing_space.undo,
+                                  self.drawing_space.redo)
         self.toolbar.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
 if __name__ == '__main__':
@@ -33,6 +35,9 @@ if __name__ == '__main__':
     window_width = 1000
     window_height = 1000
     master.geometry(str(window_width) + 'x' + str(window_height))
+    
+    with open("state_canvas.ps", "w") as f:
+       pass
 
     app = Application(window_width, window_height, master=master)
     app.pack()
