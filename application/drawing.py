@@ -27,6 +27,8 @@ class Drawing(tk.Canvas):
         self.bind('<ButtonRelease-1>', self.reset)
         self.bind('<Motion>', self.track_mouse)
 
+        self.save_state()
+
     def activate_paint(self, event):
         self.save_state()    
 
@@ -98,6 +100,7 @@ class Drawing(tk.Canvas):
                     self.old_y = event.y
 
     def reset(self, event):
+        self.save_state()
         self.old_x = None
         self.old_y = None
 
@@ -116,6 +119,7 @@ class Drawing(tk.Canvas):
             pass
         self.undo_stack.clear()
         self.redo_stack.clear()
+        self.save_state()
     
     def set_eraser(self):
         self.eraser_mode = True
