@@ -135,7 +135,7 @@ class Toolbar(tk.Frame):
         if selected_shape:  # Only update if a shape is selected
             self.shapes_menu.config(image=self.shapes_image[selected_shape])
             self.set_shape(selected_shape)
-        self.set_color(self.color)
+        self.set_color(self.color) # Set color after selecting shape mode
         self.brush_size_slider.set(self.brush_size)
         self.update_brush_size(self.brush_size) # Ensure brush size is updated
 
@@ -145,7 +145,7 @@ class Toolbar(tk.Frame):
         self.shapes_menu.config(image=self.shapes_icon)
         self.set_shape(None)
         self.selected_shape.set(None)  # Clear the selection of the shape
-        self.set_color(self.color) # Set color after selecting shape mode
+        self.set_color(self.color) # Set color after selecting normal drawing mode
         self.brush_size_slider.set(self.brush_size)
         self.update_brush_size(self.brush_size) # Ensure brush size is updated
 
