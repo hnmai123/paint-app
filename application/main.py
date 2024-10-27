@@ -2,7 +2,7 @@ import tkinter as tk
 import toolbar as tb
 import drawing as dr
 
-# Application class inherits from tk.Frame and set up the main window ò the application
+# Application class inherits from tk.Frame and set up the main window of the application
 class Application(tk.Frame):
     def __init__(self, window_width, window_height, master=None):
         super().__init__(master)
