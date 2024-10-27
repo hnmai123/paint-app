@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import colorchooser
 
-# Tpppbar class inherits from tk.Frame and provide various tools (color, shape, size, etc.) to draw on the canvas
+# Toolbar class inherits from tk.Frame and provide various tools (color, shape, size, etc.) to draw on the canvas
 class Toolbar(tk.Frame):
     def __init__(self, master=None, 
                  set_color=None, 
