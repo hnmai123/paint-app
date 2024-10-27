@@ -30,8 +30,6 @@ class Drawing(tk.Canvas):
         self.save_state()
 
     def activate_paint(self, event):
-        self.save_state()    
-
         if self.fill_mode:
             self.fill_area(event.x, event.y)
         else:
