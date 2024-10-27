@@ -27,8 +27,9 @@ class Drawing(tk.Canvas):
         self.bind('<ButtonRelease-1>', self.reset)
         self.bind('<Motion>', self.track_mouse)
 
+        self.save_state()
+
     def activate_paint(self, event):
-        self.save_state()    
         if self.fill_mode:
             self.fill_area(event.x, event.y)
         else:
@@ -45,7 +46,7 @@ class Drawing(tk.Canvas):
                 self.create_oval(event.x - self.line_width / 2, event.y - self.line_width / 2,
                                 event.x + self.line_width / 2, event.y + self.line_width / 2,
                                 fill=self.pen_color, outline=self.pen_color)
-            
+
     def save_state(self):
         self.delete("mouse_cursor")
         ps_file = "state_canvas.ps"
@@ -97,6 +98,7 @@ class Drawing(tk.Canvas):
                     self.old_y = event.y
 
     def reset(self, event):
+        self.save_state()    
         self.old_x = None
         self.old_y = None
 
@@ -114,6 +116,7 @@ class Drawing(tk.Canvas):
             pass
         self.undo_stack.clear()
         self.redo_stack.clear()
+        self.save_state()
     
     def set_eraser(self):
         self.eraser_mode = True
